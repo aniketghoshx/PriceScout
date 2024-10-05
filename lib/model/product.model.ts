@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -53,7 +57,7 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
     },
-    reviewCount: {
+    reviewsCount: {
       type: Number,
     },
     isOutOfStock: {
