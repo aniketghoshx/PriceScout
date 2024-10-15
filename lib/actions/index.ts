@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import Product from "../model/product.model";
 import { connectDB } from "../mongoose";
-import { scrapeAmazoneProduct } from "../scraper";
+import { scrapeAmazonProduct } from "../scraper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
@@ -12,7 +12,7 @@ export async function scrapeAndStoreProduct(productURL: string) {
   if (!productURL) return;
   try {
     connectDB();
-    const scrapedProduct = await scrapeAmazoneProduct(productURL);
+    const scrapedProduct = await scrapeAmazonProduct(productURL);
     if (!scrapedProduct) return;
 
     let product = scrapedProduct;
@@ -42,6 +42,7 @@ export async function scrapeAndStoreProduct(productURL: string) {
       product,
       { upsert: true, new: true }
     );
+
     revalidatePath(`/products/${newProduct.id}`);
   } catch (e: any) {
     throw new Error(`Failed to create/update product: ${e.message}`);
