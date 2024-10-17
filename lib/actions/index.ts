@@ -13,7 +13,10 @@ export async function scrapeAndStoreProduct(productURL: string) {
   try {
     connectDB();
     const scrapedProduct = await scrapeAmazonProduct(productURL);
-    if (!scrapedProduct) return;
+
+    if (!scrapedProduct) {
+      return;
+    }
 
     let product = scrapedProduct;
 
@@ -44,6 +47,8 @@ export async function scrapeAndStoreProduct(productURL: string) {
     );
 
     revalidatePath(`/products/${newProduct.id}`);
+    
+    return JSON.parse(JSON.stringify(newProduct));
   } catch (e: any) {
     throw new Error(`Failed to create/update product: ${e.message}`);
   }

@@ -15,7 +15,7 @@ export async function scrapeAmazonProduct(url: string) {
       username: `${username}-session-${session_id}`,
       password,
     },
-    host: "brd.superproxy.io",
+    host: "brd.superproxy.io:22225",
     port,
     rejectUnauthorized: false,
   };

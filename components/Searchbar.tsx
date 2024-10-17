@@ -1,6 +1,7 @@
 "use client";
 
 import { scrapeAndStoreProduct } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 const isValidAmazonProductURL = (url: string) => {
@@ -23,17 +24,25 @@ const isValidAmazonProductURL = (url: string) => {
 export const Searchbar = () => {
   const [searchPromt, setSearchPromt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isValidLink = isValidAmazonProductURL(searchPromt);
     if (!isValidLink) {
+      setSearchPromt("");
       return alert("Please provide a valid Amazon link");
     }
     try {
       setIsLoading(true);
-      
+
       const product = await scrapeAndStoreProduct(searchPromt);
+
+      if (!product) {
+        throw new Error("product not found");
+      }
+
+      router.push(`/products/${product._id}`);
     } catch (e) {
       console.log(e);
     } finally {
