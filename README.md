@@ -50,8 +50,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/adrianhajdin/pricewise.git
-cd pricewise
+git clone https://github.com/adrianhajdin/pricewise.git](https://github.com/aniketghoshx/PriceScout.git
+cd PriceScout
 ```
 
 **Installation**
@@ -74,9 +74,11 @@ BRIGHT_DATA_PASSWORD=
 #DB
 MONGODB_URI=
 
-#OUTLOOK
-EMAIL_USER=
-EMAIL_PASS=
+#GMAIL
+OAUTH_CLIENT_ID=
+OAUTH_CLIENT_SECRET=
+OAUTH_REFRESH_TOKEN=
+MAIL_USERNAME=
 ```
 
 Replace the placeholder values with your actual credentials. You can obtain these credentials by signing up on these specific websites from [BrightData](https://brightdata.com/), [MongoDB](https://www.mongodb.com/), and [Node Mailer](https://nodemailer.com/)
